@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>日志查询</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/acestatic/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/acestatic/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/acestatic/dist/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/acestatic/dist/css/ui.jqgrid.min.css" />
+
+    <!-- page specific plugin styles -->
+
+    <input type='hidden' name='csrfmiddlewaretoken' value='hf8SZ6QEvxzoNIPOHzWBTYrgr32VEaUN' />
+    <link rel="stylesheet" href="/acestatic/dist/css/datepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom_adminDateStyle.css" />
+
+
+    <!-- text fonts -->
+
+    <link rel="stylesheet" href="/acestatic/dist/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <link rel="stylesheet" href="/acestatic/dist/css/colorbox.min.css" />
+
+    <link rel="stylesheet" href="/static/css/custom_style.css" />
+
+    <script src="/acestatic/dist/js/ace-extra.min.js"></script>
+
+</head>
+
+<body class="no-skin">
+<div id="navbar" class="navbar navbar-default">
+    <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+            <span class="sr-only">Toggle sidebar</span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="navbar-header pull-left">
+            <a href="/" class="navbar-brand">
+                <img src="/static/images/logo_mini.png" class="wy_logo" border="0" alt="Netease">
+            </a>
+        </div>
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        设置
+                        <b class="caret"></b>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                it1
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="/account/profile/">
+                                <i class="ace-icon fa fa-user"></i>
+                                个人信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/account/changePW/">
+                                <i class="ace-icon fa fa-cog"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/account/logout/">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div><!-- /.navbar-container -->
+</div>
+
+<div class="main-container" id="main-container" style="overflow-x:auto;">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div id="sidebar" class="sidebar                  responsive">
+        <script type="text/javascript">
+            try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+        </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+						<span class="bigger-120">
+							菜单栏
+						</span>
+            </div>
+        </div><!-- /.sidebar-shortcuts -->
+
+        <ul class="nav nav-list">
+
+            <li class="">
+                <a href="/assets/list/">
+                    <i class="menu-icon fa fa-desktop"></i>
+                    <span class="menu-text"> 资产管理 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+
+
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list"></i>
+                    <span class="menu-text"> 资产查询 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+                <ul class="submenu">
+
+                    <li class="">
+                        <a href="/assets/query/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            资产查询
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+
+                    <li class="">
+                        <a href="/assets/batchQuery/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            批量查询
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+
+
+
+
+
+            <li class="">
+                <!-- <li class=""> -->
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> 属性管理 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+
+
+
+
+
+                    <!-- IT资产配置管理 -->
+                    <li class="">
+                        <a href="/assets/property/confCPU/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            CPU
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confHarddisk/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            硬盘
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confMen/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            内存
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confDisplay/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            显示卡
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confCdrom/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            光盘驱动器
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confNetcard/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            网卡
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confSound/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            声卡
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/property/confStandy/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            地点
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+
+                </ul>
+            </li>
+
+
+
+
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list-alt"></i>
+                    <span class="menu-text"> 属性查看 </span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="/assets/propertyView/locationPlace/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            机房地点
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/propertyView/confBrand/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            配置_品牌
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/propertyView/confType/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            配置_类型
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/propertyView/usage/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            资产用途
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/assets/propertyView/company/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            资产所属公司
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="/assets/propertyView/status/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            使用状态
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+
+
+
+
+
+
+
+
+
+            <li class="active">
+                <a href="/assets/logQuery/">
+                    <i class="menu-icon fa fa-tag"></i>
+                    <span class="menu-text"> 日志查询 </span>
+                </a>
+
+                <b class="arrow"></b>
+            </li>
+
+
+
+
+
+
+
+
+
+
+
+
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-list"></i>
+                    <span class="menu-text"> 盘点管理 </span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+                    <li class="">
+                        <a href="/interface/asset/inventory/work?flag=nbvprc">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            开始盘点
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="">
+                        <a href="/interface/asset/inventory/search?flag=nbvprc">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            盘点查询
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+
+
+
+            <li class="">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-tachometer"></i>
+							<span class="menu-text">
+								个人资料
+							</span>
+
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                    <li class="">
+                        <a href="/account/profile/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            个人信息
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="/account/showcolumns/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            显示控制
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="/account/changePW/">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            密码变更
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+            </li>
+
+
+
+
+        </ul><!-- /.nav-list -->
+
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+            <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+        <script type="text/javascript">
+            try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+        </script>
+    </div>
+
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="ace-icon fa fa-home home-icon"></i>
+                        <a href="/">首页</a>
+                    </li>
+
+                    <li><span>日志查询</span></li>
+
+                </ul><!-- /.breadcrumb -->
+            </div>
+
+            <div class="page-content">
+
+                <div class="page-body">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="widget-box transparent">
+                            <div class="widget-header">
+                                <h4 class="widget-title lighter smaller">
+                                    <i class="ace-icon fa fa-indent"></i>
+                                    查询条件
+                                </h4>
+                                <div class="widget-toolbar no-border"></div>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main no-padding">
+                                    <div class="tab-content no-padding">
+                                        <div id="task-tab" class="tab-pane active">
+                                            <div style="padding-top: 10px;padding-bottom: 10px;">
+                                                <div id="show_info" style="padding-top: 3px;padding-bottom: 2px;"></div>
+                                                <form id="frmSearch">
+                                                    <div class="minusLineHeight">
+                                                        <select id="conditionId" name="conditionId" style="width:140px;height:35px;Border-color:#428BCA;font-weight:bold;">
+                                                            <option value>请选择查询列</option>
+                                                            <option value="assets_sn">资产编号</option>
+                                                            <option value="location_out_ip">外网IP</option>
+                                                            <option value="location_in_ip">内网IP</option>
+                                                            <option value="finance_compact_sn">合同号</option>
+                                                            <option value="use_user">使用者</option>
+                                                            <option value="employee_code">使用者员工编号</option>
+                                                            <option value="order_sn">下单号</option>
+                                                            <option value="finance_usage_code">财务编号</option>
+                                                        </select>
+                                                        <button type="button" class="btn btn-primary" id="btn_search">搜 索</button>
+                                                    </div>
+                                                    <textarea id="textId" disabled=true cols=120 rows=8 class="minusLineHeight block"></textarea>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <table id="grid-table"></table>
+                                <div id="grid-pager"></div>
+                                <!-- PAGE CONTENT ENDS -->
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div>
+                </div>
+
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-content">
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script src="/acestatic/dist/js/jquery.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="dist/js/jquery.min.js"></script>
+<![endif]-->
+
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='dist/js/jquery.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='dist/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<!-- page specific plugin scripts -->
+
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript">
+    window.__admin_media_prefix__ = "/static/admin/";
+    var django = {jQuery: jQuery};
+</script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+
+<script src="/acestatic/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/acestatic/dist/js/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="/acestatic/dist/js/jqGrid/i18n/grid.locale-cn.js"></script>
+
+<!-- ace scripts -->
+<script src="/acestatic/dist/js/ace-elements.min.js"></script>
+<script src="/acestatic/dist/js/ace.min.js"></script>
+<!-- colorbox scripts -->
+<script src="/acestatic/dist/js/jquery.colorbox.min.js"></script>
+<!-- auto add csrf_token -->
+<script src="/static/js/csrf_pach.js"></script>
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+    var dict = {"jq_type_all": "001:\u670d\u52a1\u5668\u6216\u76d8\u9635;002:\u670d\u52a1\u5668\u914d\u4ef6;003:\u53f0\u5f0f\u673a;004:\u7b14\u8bb0\u672c;005:\u663e\u793a\u5668;006:\u6253\u5370\u673a;007:\u4f20\u771f\u673a;008:\u7f51\u7edc\u8bbe\u5907;009:IT\u529e\u516c\u8bbe\u5907;010:\u8f6f\u4ef6;011:\u5176\u4ed6IT\u8bbe\u5907;012:\u624b\u673a;013:\u7a7a\u8c03;014:\u5bb6\u7535;015:\u6c7d\u8f66;016:\u624b\u5199\u677f;017:\u884c\u653f\u529e\u516c\u8bbe\u5907;018:\u88c5\u4fee;019:\u623f\u5c4b\u5efa\u7b51\u7269;020:IT\u670d\u52a1\u5668\u6216\u76d8\u9635;021:\u6e38\u620f\u90e8\u7535\u5b50\u4ea7\u54c1;022:\u7ecf\u8425\u6027\u79df\u5165\u56fa\u5b9a\u8d44\u4ea7\u6539\u826f;023:\u6295\u5f71\u4eea;024:\u7535\u89c6\u673a;025:\u673a\u5668\u8bbe\u5907"};
+    function trim(str){ //删除左右两端的空格
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    }
+
+    function getCookie(name)
+    {
+        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+        if(arr=document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+    function view_asset(id) {
+        $.colorbox({
+            iframe: true,
+            href: '/assets/viewLog/?id='+id,
+            width: '1300',
+            height: '100%'
+        });
+    }
+
+    jQuery(function($) {
+        var grid_selector = "#grid-table";
+        var pager_selector = "#grid-pager";
+
+        // define the shortcuts of query widgets
+        var f = {
+            selectColW: $('#conditionId'),
+            textAreaW: $('#textId'),
+        };
+
+        f.selectColW.change(function(){
+            var selectedColName = f.selectColW.val();
+            f.textAreaW.val('');
+            if( selectedColName == '' ) {
+                f.textAreaW.attr("disabled",true);
+                f.textAreaW.css('border-color', '');
+            } else {
+                f.textAreaW.attr("disabled", false);
+                f.textAreaW.css('border-color', '#428BCA');
+            }
+        });
+
+        // get the jqGrid query filter of all selection conditions which are above the table
+        function getQueryFilter() {
+            var selectedColName = f.selectColW.val();
+            var textValue = f.textAreaW.val();
+
+            var array = textValue.replace(/\n/g,",").split(",");
+            var myfilter = { groupOp: "OR", rules: []};
+            for( var i in array ){
+                var queryValue = trim(array[i]);
+                if( queryValue != "" ){
+                    myfilter.rules.push({field: selectedColName, op: "eq", data: queryValue});
+                }
+            }
+
+            return myfilter;
+        }
+
+        // datetime listener
+        $("#id_queryBeginDT_0").focus(function(){
+            var $time = $("#id_queryBeginDT_1");
+            if ( $(this).val() != '' && $time.val() == '') {
+                $time.val("00:00");
+            }
+        });
+        $("#id_queryEndDT_0").focus(function(){
+            var $time = $("#id_queryEndDT_1");
+            if ( $(this).val() != '' && $time.val() == '') {
+                $time.val("23:59");
+            }
+        });
+        $("#btn_search").click(function(){
+            var token = getCookie('csrftoken');
+            var myfilter = getQueryFilter();
+            var isSearch = myfilter.rules.length > 0;
+            $(grid_selector).jqGrid("setGridParam", {
+                mtype: "post",
+                postData: {
+                    operator: $('#id_operator').val(),
+                    action: $('#id_action').val(),
+                    queryBeginDT_0: $('#id_queryBeginDT_0').val(),
+                    queryBeginDT_1: $('#id_queryBeginDT_1').val(),
+                    queryEndDT_0: $('#id_queryEndDT_0').val(),
+                    queryEndDT_1: $('#id_queryEndDT_1').val(),
+                    csrfmiddlewaretoken: token,
+                    filters: JSON.stringify(myfilter),
+                },
+                search: isSearch,
+                page: '1'
+            });
+            $(grid_selector).trigger("reloadGrid");
+        });
+
+
+        //resize to fit page size
+        $(window).on('resize.jqGrid', function () {
+            $(grid_selector).jqGrid( 'setGridWidth', $(".page-content").width() );
+        })
+        //resize on sidebar collapse/expand
+        var parent_column = $(grid_selector).closest('[class*="col-"]');
+        $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+            if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+                //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                setTimeout(function() {
+                    $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                }, 0);
+            }
+        })
+
+        jQuery(grid_selector).jqGrid({
+            url: "/assets/ajax/searchLog/",
+            caption: "资产信息",
+            postData: {},
+            mtype: "get",
+            datatype: "json",
+            height: 335,
+            colNames:['ID', '资产编号', '所属公司', '资产名称', '品牌', '机房名称', '资产用途', '使用者', '备注', '操作人', '动作', '操作时间', ''],
+            colModel:[
+                {name:'id',index:'id', width:30, editable: true, hidden:true},
+                {name:'assets_sn',index:'assets_sn', width:20, editable:true, editrules:{required:true}},
+                {name:'assets_company',index:'assets_company', width:30},
+                {name:'type_all',index:'type_all', width:15, edittype:'select', editoptions:{value:dict['jq_type_all']}, formatter:'select', formatoptions:{value:dict['jq_type_all']}},
+                {name:'conf_brand',index:'conf_brand', width:15},
+                {name:'location_room_name',index:'location_room_name', width:30},
+                {name:'use_assets_use',index:'use_assets_use', width:30, editable: true, edittype:"text",},
+                {name:'use_user',index:'use_user', width:10, editable: true, edittype:"text"},
+                {name:'use_comments',index:'use_comments', width:20, editable: true, edittype:"text"},
+                {name:'user_name_en',index:'user_name_en', width:10, editable: true, edittype:"text"},
+                {name:'opt_type',index:'opt_type', width:10, editable: true, edittype:"text"},
+                {name:'opt_time',index:'opt_time', width:20, editable: true, edittype:"text"},
+                {name: 'id', index: 'id',width:7,search:false, formatter: function (value, grid, rows, state) {
+                    return '<div style="margin-left:8px;"><div title="查看" style="float:left;cursor:pointer;" class="ui-pg-div ui-inline-edit" onclick="view_asset(\''+value+'\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');" onmouseout="jQuery(this).removeClass(\'ui-state-hover\')"><span class="ui-icon ace-icon fa fa-search-plus  blue"></span></div></div>';
+                }
+                },
+            ],
+            hidegrid: false,
+            viewrecords: true,
+            rowNum:10,
+            rowList:[10,20,30],
+            pager : pager_selector,
+            altRows: true,
+            //toppager: true,
+
+            autowidth: true,
+            autoscroll: true,
+
+            multiselect: false,
+            //multikey: "ctrlKey",
+            multiboxonly: false,
+
+            loadComplete : function() {
+                var table = this;
+                setTimeout(function(){
+                    styleCheckbox(table);
+
+                    updateActionIcons(table);
+                    updatePagerIcons(table);
+                    enableTooltips(table);
+                }, 0);
+            },
+        });
+        $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
+
+        //switch element when editing inline
+        function aceSwitch( cellvalue, options, cell ) {
+            setTimeout(function(){
+                $(cell) .find('input[type=checkbox]')
+                        .addClass('ace ace-switch ace-switch-5')
+                        .after('<span class="lbl"></span>');
+            }, 0);
+        }
+        //enable datepicker
+        function pickDate( cellvalue, options, cell ) {
+            setTimeout(function(){
+                $(cell) .find('input[type=text]')
+                        .datepicker({format:'yyyy-mm-dd' , autoclose:true});
+            }, 0);
+        }
+
+
+        //navButtons
+        jQuery(grid_selector).jqGrid('navGrid',pager_selector,
+                { 	//navbar options
+                    edit: false,
+                    editicon : 'ace-icon fa fa-pencil blue',
+                    add: false,
+                    addicon : 'ace-icon fa fa-plus-circle purple',
+                    del: false,
+                    delicon : 'ace-icon fa fa-trash-o red',
+                    search: false,
+                    searchicon : 'ace-icon fa fa-search orange',
+                    refresh: true,
+                    refreshicon : 'ace-icon fa fa-refresh green',
+                    view: false,
+                    viewicon : 'ace-icon fa fa-search-plus grey',
+                },
+                {
+                    //edit record form
+                    //closeAfterEdit: true,
+                    //width: 700,
+                    recreateForm: true,
+                    beforeShowForm : function(e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_edit_form(form);
+                    }
+                },
+                {
+                    //new record form
+                    //width: 700,
+                    closeAfterAdd: true,
+                    recreateForm: true,
+                    viewPagerButtons: false,
+                    beforeShowForm : function(e) {
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
+                                .wrapInner('<div class="widget-header" />')
+                        style_edit_form(form);
+                    }
+                },
+                {
+                    //delete record form
+                    recreateForm: true,
+                    beforeShowForm : function(e) {
+                        var form = $(e[0]);
+                        if(form.data('styled')) return false;
+
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+                        style_delete_form(form);
+
+                        form.data('styled', true);
+                    },
+                    onClick : function(e) {
+                        //alert(1);
+                    }
+                },
+                {
+                    //search form
+                    recreateForm: true,
+                    afterShowSearch: function(e){
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                        style_search_form(form);
+                    },
+                    afterRedraw: function(){
+                        style_search_filters($(this));
+                    },
+                    multipleSearch: true,
+                    multipleGroup:true,
+                    showQuery: true
+                },
+                {
+                    //view record form
+                    recreateForm: true,
+                    beforeShowForm: function(e){
+                        var form = $(e[0]);
+                        form.closest('.ui-jqdialog').find('.ui-jqdialog-title').wrap('<div class="widget-header" />')
+                    }
+                }
+        )
+
+
+
+        function style_edit_form(form) {
+            //enable datepicker on "sdate" field and switches for "stock" field
+            form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
+
+            form.find('input[name=stock]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
+            //don't wrap inside a label element, the checkbox value won't be submitted (POST'ed)
+            //.addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+
+
+            //update buttons classes
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();//ui-icon, s-icon
+            buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+            buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+
+            buttons = form.next().find('.navButton a');
+            buttons.find('.ui-icon').hide();
+            buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+            buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+        }
+
+        function style_delete_form(form) {
+            var buttons = form.next().find('.EditButton .fm-button');
+            buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();//ui-icon, s-icon
+            buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+            buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
+        }
+
+        function style_search_filters(form) {
+            form.find('.delete-rule').val('X');
+            form.find('.add-rule').addClass('btn btn-xs btn-primary');
+            form.find('.add-group').addClass('btn btn-xs btn-success');
+            form.find('.delete-group').addClass('btn btn-xs btn-danger');
+        }
+        function style_search_form(form) {
+            var dialog = form.closest('.ui-jqdialog');
+            var buttons = dialog.find('.EditTable')
+            buttons.find('.EditButton a[id*="_reset"]').addClass('btn btn-sm btn-info').find('.ui-icon').attr('class', 'ace-icon fa fa-retweet');
+            buttons.find('.EditButton a[id*="_query"]').addClass('btn btn-sm btn-inverse').find('.ui-icon').attr('class', 'ace-icon fa fa-comment-o');
+            buttons.find('.EditButton a[id*="_search"]').addClass('btn btn-sm btn-purple').find('.ui-icon').attr('class', 'ace-icon fa fa-search');
+        }
+
+        function beforeDeleteCallback(e) {
+            var form = $(e[0]);
+            if(form.data('styled')) return false;
+
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_delete_form(form);
+
+            form.data('styled', true);
+        }
+
+        function beforeEditCallback(e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />')
+            style_edit_form(form);
+        }
+
+
+
+        //it causes some flicker when reloading or navigating grid
+        //it may be possible to have some custom formatter to do this as the grid is being created to prevent this
+        //or go back to default browser checkbox styles for the grid
+        function styleCheckbox(table) {
+            /**
+             $(table).find('input:checkbox').addClass('ace')
+             .wrap('<label />')
+             .after('<span class="lbl align-top" />')
+
+
+             $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
+             .find('input.cbox[type=checkbox]').addClass('ace')
+             .wrap('<label />').after('<span class="lbl align-top" />');
+             */
+        }
+
+
+        //unlike navButtons icons, action icons in rows seem to be hard-coded
+        //you can change them like this in here if you want
+        function updateActionIcons(table) {
+            /**
+             var replacement =
+             {
+                 'ui-ace-icon fa fa-pencil' : 'ace-icon fa fa-pencil blue',
+                 'ui-ace-icon fa fa-trash-o' : 'ace-icon fa fa-trash-o red',
+                 'ui-icon-disk' : 'ace-icon fa fa-check green',
+                 'ui-icon-cancel' : 'ace-icon fa fa-times red'
+             };
+             $(table).find('.ui-pg-div span.ui-icon').each(function(){
+						var icon = $(this);
+						var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+						if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+					})
+             */
+        }
+
+        //replace icons with FontAwesome icons like above
+        function updatePagerIcons(table) {
+            var replacement =
+            {
+                'ui-icon-seek-first' : 'ace-icon fa fa-angle-double-left bigger-140',
+                'ui-icon-seek-prev' : 'ace-icon fa fa-angle-left bigger-140',
+                'ui-icon-seek-next' : 'ace-icon fa fa-angle-right bigger-140',
+                'ui-icon-seek-end' : 'ace-icon fa fa-angle-double-right bigger-140'
+            };
+            $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+                var icon = $(this);
+                var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+                if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+            })
+        }
+
+        function enableTooltips(table) {
+            $('.navtable .ui-pg-button').tooltip({container:'body'});
+            $(table).find('.ui-pg-div').tooltip({container:'body'});
+        }
+
+        //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+        $(document).one('ajaxloadstart.page', function(e) {
+            $(grid_selector).jqGrid('GridUnload');
+            $('.ui-jqdialog').remove();
+        });
+    });
+</script>
+
+</body>
+</html>

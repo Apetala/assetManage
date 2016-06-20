@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>资产查看</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+    <link rel="stylesheet" href="style/css/subView.css">
+    <style>
+        .detail-module{margin: 0;}
+        .container-fluid{margin-top: 20px; margin-bottom: 10px;}
+        input.form-input{padding: 0 5px; margin: -2px;}
+        textarea.form-input{margin: 0 3px; height: 6em;}
+        .splitLine{border: none; padding: 0; height: 1px; background-color: #fff;}
+        .col-md-6{padding-right: 0;}
+        #orderForm .label{color: #000; background: none;}
+        #orderForm input, #orderForm select, #orderForm textarea{color: #626262;}
+    </style>
+    <!-- page specific plugin styles -->
+
+
+</head>
+<body class="no-skin">
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <div class="page-content">
+
+                <div class="page-body">
+                    <div class="page-header" style="padding-bottom:0px;">
+                        <h3 class="row  blue" style="height:20px">
+			<span class="col-sm-6">
+				<i class="ace-icon fa fa-briefcase"></i> 日志查询
+			</span>
+                        </h3>
+                    </div>
+
+                    <form id="orderForm" class="page-body" method="post" enctype="multipart/form-data" novalidate="novalidate">
+                        <div class="apply-content detail-module">
+                            <div class="module-title"><!--
+                                <strong>日志信息</strong>(注：红色边框部分是修改过的属性)-->
+                                <div class="workflow-total-amount" appendconfieldname="totalInfo"></div>
+                            </div>
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">操作人</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" name="user_name_en" readonly value=""></span></div>
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">动作</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" name="opt_type" readonly value=""></span></div>
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">发生时间</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" name="opt_time" readonly value=""></span></div>
+                                </div>
+                                <br>
+
+
+                                <div class="module-title">
+                                    <strong>基本类</strong>
+                                    <div class="workflow-total-amount" appendconfieldname="totalInfo"></div>
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">资产编号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="assets_sn" name="assets_sn" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">资产名称</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="type_all" name="type_all" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">使用状态</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="status" name="status" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">资产状态</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="assets_status" name="assets_status" readonly value=""></span></div>
+
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">系统序列号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="system_sn" name="system_sn" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_供应商</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_provider" name="conf_provider" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_型号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_model" name="conf_model" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">验收日期</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_buy_date" name="finance_buy_date" readonly value=""></span></div>
+
+                                </div>
+                                <div class="row">
+
+
+                                </div>
+
+
+
+                                <div class="module-title">
+                                    <strong>成本类</strong>
+                                    <div class="workflow-total-amount" appendconfieldname="totalInfo"></div>
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">财务编号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_usage_code" name="finance_usage_code" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">用途_资产用途</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="use_assets_use" name="use_assets_use" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">产品名</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="product_code" name="product_code" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">用途_用途备注</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="use_comments" name="use_comments" readonly value=""></span></div>
+
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">资产所属公司</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="assets_company" name="assets_company" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">用途_使用者</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="use_user" name="use_user" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">使用者员工编号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="employee_code" name="employee_code" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">使用者邮箱</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="email" name="email" readonly value=""></span></div>
+
+                                </div>
+                                <div class="row">
+
+
+                                </div>
+
+
+
+                                <div class="module-title">
+                                    <strong>财务类</strong>
+                                    <div class="workflow-total-amount" appendconfieldname="totalInfo"></div>
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">合同号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_compact_sn" name="finance_compact_sn" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">凭证号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_voucher_sn" name="finance_voucher_sn" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">验收单编号</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_checker_sn" name="finance_checker_sn" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">购买价格</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="real_price" name="real_price" readonly value=""></span></div>
+
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">入账价格</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_price" name="finance_price" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">入账日期</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="finance_pay_date" name="finance_pay_date" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">折旧日期</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="standby1" name="standby1" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">报废日期</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="abandon_date" name="abandon_date" readonly value=""></span></div>
+
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">报废原因</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="abandon_resean" name="abandon_resean" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">收益</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="proceeds" name="proceeds" readonly value=""></span></div>
+
+
+                                </div>
+
+
+
+                                <div class="module-title">
+                                    <strong>物理位置</strong>
+                                    <div class="workflow-total-amount" appendconfieldname="totalInfo"></div>
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">位置_使用地点</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="location_usage" name="location_usage" readonly value=""></span></div>
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">地点名称</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="standby2" name="standby2" readonly value=""></span></div>
+
+
+                                </div>
+
+
+
+
+
+                                <div class="module-title">
+                                    <strong>其它配置</strong>
+                                    <div class="workflow-total-amount" appendconfieldname="totalInfo"></div>
+                                </div>
+                                <br>
+                                <div class="row">
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_详细信息</span><span class="col-md-7"><textarea disabled=true id="conf_text" name="conf_text" cols=16 rows=3></textarea></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">资产描述</span><span class="col-md-7"><textarea disabled=true id="other_describe" name="other_describe" cols=16 rows=3></textarea></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">二级部门负责人</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="standby3" name="standby3" readonly value=""></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_CPU</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_cpu" name="conf_cpu" readonly value=""></span></div>
+
+
+                                </div>
+                                <div class="row">
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_硬盘</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_harddisk" name="conf_harddisk" readonly value=""></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_内存</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_mem" name="conf_mem" readonly value=""></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_显卡</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_display" name="conf_display" readonly value=""></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_光驱</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_cdrom" name="conf_cdrom" readonly value=""></span></div>
+
+
+                                </div>
+                                <div class="row">
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_网卡</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_netcard" name="conf_netcard" readonly value=""></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_声卡</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_sound" name="conf_sound" readonly value=""></span></div>
+
+
+
+
+                                    <div class="col-md-3 form-group"><span class="col-md-5 label">配置_Service Tag</span><span class="col-md-7"><input class="col-md-12 form-input" type="text" id="conf_standby1" name="conf_standby1" readonly value=""></span></div>
+
+
+
+                                </div>
+
+
+                            </div>	<!-- end container-fluid -->
+                        </div>	<!-- end apply-content detail-module -->
+
+                        <hr class="splitLine">
+
+                        <div class="detail-module operate-module" _marker="detailPage">
+                            <div class="module-content">
+                                <button class="btn  btn-sm  btn-primary" type="button" id="btn-submit"> 关 闭 </button>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- end page-body -->
+
+            </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-content">
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<script src="assets/js/jquery-1.10.2.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="assets/js/jquery-ui-1.10.3.full.min.js"></script>
+<script src="assets/js/jquery.form.js"></script>
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="js/messages_cn.js"></script>
+
+<!-- auto add csrf_token -->
+<script src="js/csrf_pach.js"></script>
+
+<!-- page specific plugin scripts -->
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    var ob;
+    function requestparm(paras) {
+        var url = location.href;
+        //alert(url);
+        var paraString = url.substring(url.indexOf("?") + 1, url.length).split("&");
+        //alert(paraString);
+        //alert(decodeURI(paraString));
+        //JSON.parse(str)
+        ob = JSON.parse(decodeURI(paraString));
+        //alert(ob);
+        return ob;
+    }
+    var city = requestparm('city');
+    //var type = requestparm('type');
+    $("#btn-submit").click(function(){
+        parent.$.colorbox.close();
+    });
+    /* $(document).ready(function () {
+     if (type !== null && type == "view") {
+     $("#submitok").hide();
+     $("#btnclear").hide();
+     }
+
+     });*/
+    var inputs=$(".form-input");
+    var textareas=$("textarea");
+    for(var a=0;a<textareas.length;a++){
+        inputs.push(textareas[a]);
+    }
+    console.log(inputs.length);
+    for(var key in ob){
+        console.log(key);
+        console.log(ob[key]);/*
+        for(var i=0;i<textareas.length;i++){
+            if (key==textareas[i].name){
+                alert();
+                textareas[i].value=ob[key];
+            }
+        }*/
+        for(var i=0;i<inputs.length;i++){
+            if (key==inputs[i].name){
+                //alert();
+                inputs[i].value=ob[key];
+            }
+        }
+    }
+
+    //console.log(inputs.length);
+    debugger;
+</script>
+
+
+</body>
+</html>

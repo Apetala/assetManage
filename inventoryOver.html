@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>IT - 资产管理系统</title>
+    <meta name="keywords" content="IT - 资产管理系统" />
+    <meta name="description" content="IT - 资产管理系统" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <link rel="stylesheet" href="assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="assets/css/chosen.css" />
+    <link rel="stylesheet" href="assets/css/datepicker.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-timepicker.css" />
+    <link rel="stylesheet" href="assets/css/daterangepicker.css" />
+    <link rel="stylesheet" href="assets/css/ui.jqgrid.css" />
+    <link rel="stylesheet" href="assets/css/colorpicker.css" />
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="assets/js/ace-extra.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .ui-jqgrid .ui-jqgrid-title {
+            float: left;
+            margin: -30px 0 0 13px;
+        }
+        .form-horizontal{
+            overflow: hidden;
+            background-color: #fff;
+            padding-top: 10px;
+        }
+        .form-horizontal .form-group{
+            height: 31px;
+        }
+        input[type=checkbox]{
+            vertical-align: text-bottom;
+            margin-left: 5px;
+            width:18px;
+            height: 18px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="index.html" class="navbar-brand">
+                <img src="style/img/logo_mini.png" alt="Netease">
+            </a><!-- /.brand -->
+        </div><!-- /.navbar-header -->
+
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+								<span class="user-info">
+									陈磊
+								</span>
+
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="showcolumns.html">
+                                <i class="icon-cog"></i>
+                                设置
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="profile.html">
+                                <i class="icon-user"></i>
+                                个人资料
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="singin.html">
+                                <i class="icon-off"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.ace-nav -->
+        </div><!-- /.navbar-header -->
+    </div><!-- /.container -->
+</div>
+
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+    </script>
+
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar" id="sidebar">
+            <script type="text/javascript">
+                try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+            </script>
+
+
+            <ul class="nav nav-list">
+                <li>
+                    <a href="index.html">
+                        <i class="icon-tasks"></i>
+                        <span class="menu-text"> 资产管理 </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-toggle">
+                        <i class="icon-desktop"></i>
+                        <span class="menu-text"> 资产查询 </span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="query.html">
+                                <i class="icon-double-angle-right"></i>
+                                普通查询
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="highQuery.html">
+                                <i class="icon-double-angle-right"></i>
+                                高级查询
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--<li>
+                    <a class="dropdown-toggle">
+                        <i class="icon-list"></i>
+                        <span class="menu-text"> 属性查询 </span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="confStandy.html">
+                                <i class="icon-double-angle-right"></i>
+                                机房地点
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                新增
+                            </a>
+                        </li>
+                        <li>
+                            <a href="confType.html">
+                                <i class="icon-double-angle-right"></i>
+                                配置类型
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                资产用途
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                使用状态
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                资产新增公司
+                            </a>
+                        </li>
+                    </ul>
+                </li>-->
+
+                <li>
+                    <a href="batchQuery.html" class="dropdown-toggle">
+                        <i class="icon-edit"></i>
+                        <span class="menu-text"> 批量修改 </span>
+
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-toggle">
+                        <i class="icon-time"></i>
+                        <span class="menu-text"> 变更查询 </span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="assetsHistory.html">
+                                <i class="icon-double-angle-right"></i>
+                                资产修改记录
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="userHistory.html">
+                                <i class="icon-double-angle-right"></i>
+                                用户历史记录
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="active">
+                    <a class="dropdown-toggle">
+                        <i class="icon-dashboard"></i>
+
+								<span class="menu-text">
+									盘点管理
+								</span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="inventory.html">
+                                <i class="icon-double-angle-right"></i>
+                                开始盘点
+                            </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="inventoryOver.html">
+                                <i class="icon-double-angle-right"></i>
+                                盘点结束
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="dropdown-toggle">
+                        <i class="icon-tag"></i>
+
+								<span class="menu-text">
+									库存管理
+									<span class="badge badge-primary ">5</span>
+								</span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="stock.html">
+                                <i class="icon-double-angle-right"></i>
+                                正式库存
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="borrowStock.html">
+                                <i class="icon-double-angle-right"></i>
+                                借用库存
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="ca.html">
+                                <i class="icon-double-angle-right"></i>
+                                成本分摊
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--<li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-file-alt"></i>
+
+                        <span class="menu-text">
+                            属性管理
+                        </span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                CPU
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                硬盘
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                内存
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                显示卡
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                光驱
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                网卡
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                声卡
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                地点
+                            </a>
+                        </li>
+                    </ul>
+                </li>-->
+
+
+                <li>
+                    <a class="dropdown-toggle">
+                        <i class="icon-cog"></i>
+
+								<span class="menu-text">
+									我的操作
+								</span>
+
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+
+                    <ul class="submenu">
+                        <!--<li>
+                            <a href="">
+                                <i class="icon-double-angle-right"></i>
+                                我的权限
+                            </a>
+                        </li>-->
+
+                        <li>
+                            <a href="profile.html">
+                                <i class="icon-double-angle-right"></i>
+                                个人信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="showcolumns.html">
+                                <i class="icon-double-angle-right"></i>
+                                显示控制
+                            </a>
+                        </li>
+                        <li>
+                            <a href="changePW.html">
+                                <i class="icon-double-angle-right"></i>
+                                修改密码
+                            </a>
+                        </li>
+                        <li>
+                            <a href="singin.html">
+                                <i class="icon-double-angle-right"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.nav-list -->
+            <!--左侧导航 可伸缩按钮-->
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+            </div>
+
+            <script type="text/javascript">
+                try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+            </script>
+        </div>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                </script>
+
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li>盘点管理</li>
+                    <li class="active">盘点结束</li>
+                </ul><!-- .breadcrumb -->
+            </div>
+
+
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="error-container">
+                            <div class="well">
+                                <h1 class="grey lighter smaller">
+											<span class="blue bigger-125">
+												<i class="icon-random"></i>
+												500
+											</span>
+                                    待续……
+                                </h1>
+
+                                <hr />
+                                <h3 class="lighter smaller">
+                                    我们正在加紧
+                                    <i class="icon-wrench icon-animated-wrench bigger-125"></i>
+                                    修建!
+                                </h3>
+
+                                <div class="space"></div>
+
+                                <div>
+                                    <h4 class="lighter smaller">与此同时，您可以：</h4>
+
+                                    <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                                        <li>
+                                            <i class="icon-hand-right blue"></i>
+                                            浏览系统其他功能
+                                        </li>
+
+                                        <li>
+                                            <i class="icon-hand-right blue"></i>
+                                            给我们提出您浏览该系统时的错误！
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <hr />
+                                <div class="space"></div>
+
+                                <div class="center">
+                                    <a href="#" class="btn btn-grey">
+                                        <i class="icon-arrow-left"></i>
+                                        返回
+                                    </a>
+
+                                    <a href="index.html" class="btn btn-primary">
+                                        <i class="icon-dashboard"></i>
+                                        主页
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div>
+
+    </div><!-- /.main-container-inner -->
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/typeahead-bs2.min.js"></script>
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+<script src="assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/fuelux/fuelux.spinner.min.js"></script>
+<script src="assets/js/jquery.autosize.min.js"></script>
+<script src="assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+<script src="assets/js/jquery.maskedinput.min.js"></script>
+<script src="assets/js/bootstrap-tag.min.js"></script>
+<!-- ace scripts -->
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+
+</body>
+</html>
